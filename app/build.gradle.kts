@@ -2,7 +2,9 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     kotlin("kapt")
-    alias(libs.plugins.hilt)
+    alias(libs.plugins.hilt.plugin)
+    id("kotlin-parcelize")
+
 }
 
 android {
@@ -51,6 +53,10 @@ android {
     }
 }
 
+kapt {
+    correctErrorTypes = true
+}
+
 dependencies {
 
     implementation(libs.androidx.core.ktx)
@@ -61,10 +67,16 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.constraint.layout)
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
-    implementation(libs.hilt)
-    implementation(libs.hilt.kapt)
+    implementation(libs.hilt.android)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+    kapt(libs.hilt.android.compiler)
+    implementation(libs.kotlin.coroutines)
+    implementation(libs.androidx.fragment)
+    implementation(libs.androidx.activity)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
