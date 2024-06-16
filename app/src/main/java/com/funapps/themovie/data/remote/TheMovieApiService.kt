@@ -9,6 +9,17 @@ import retrofit2.http.Query
 interface TheMovieApiService {
 
     @GET("person/popular?")
-    suspend fun getPopularList(@Query("language") language: String, @Query("page") page: String): Response<PopularResponse>
+    suspend fun getPopularList(
+        @Query("language") language: String,
+        @Query("page") page: String
+    ): Response<PopularResponse>
 
+    @GET("discover/movie?")
+    suspend fun getMovieList(
+        @Query("include_adult") include_adult: Boolean,
+        @Query("include_video") include_video: Boolean,
+        @Query("language") language: String,
+        @Query("sort_by") sort_by: String,
+        @Query("page") page: String
+    ): Response<PopularResponse>
 }

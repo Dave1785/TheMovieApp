@@ -9,11 +9,11 @@
         android:title="Home"
         android:icon="@drawable/movie" />
     <item
-        android:id="@+id/mapFragment"
+        android:id="@+id/mapsFragment"
         android:title="Home"
         android:icon="@drawable/add_location" />
     <item
-        android:id="@+id/saveFragment"
+        android:id="@+id/cameraFragment"
         android:title="Home"
         android:icon="@drawable/baseline_camera_24" />
 </menu>

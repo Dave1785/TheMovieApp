@@ -7,11 +7,17 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class PopularRepositoryImpl  @Inject constructor(private val service: TheMovieApiService): PopularRepository {
-
-    override suspend fun getPopularList(page: Int): Flow<ResultType<PopularResponse>> = flow {
+class MoviesRepositoryImpl @Inject constructor(private val service: TheMovieApiService) :
+    MoviesRepository {
+    override suspend fun getMoviesList(page: Int): Flow<ResultType<PopularResponse>> = flow {
         try {
-            val response = service.getPopularList("en-US", page.toString())
+            val response = service.getMovieList(
+                include_adult = false,
+                include_video = false,
+                language = "en-US",
+                sort_by = "popularity.desc",
+                page = page.toString()
+            )
             if (response.isSuccessful) {
                 val data = response.body()
                 if (data != null) {
@@ -26,5 +32,4 @@ class PopularRepositoryImpl  @Inject constructor(private val service: TheMovieAp
             emit(ResultType.Error(e))
         }
     }
-
 }

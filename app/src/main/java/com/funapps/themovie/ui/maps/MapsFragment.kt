@@ -1,4 +1,4 @@
-package com.funapps.themovie.ui.home
+package com.funapps.themovie.ui.maps
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,17 +10,15 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.fragment.findNavController
 import com.funapps.themovie.R
 import com.funapps.themovie.network.ResultType
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class MapsFragment : Fragment() {
 
-    private val homeViewModel: HomeViewModel by viewModels()
+    private val mapsViewModel: MapsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,12 +35,12 @@ class HomeFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED){
-                homeViewModel.getPopularList(1)
+                mapsViewModel.getPopularList(1)
             }
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
-            homeViewModel.popularList.collect { result ->
+            mapsViewModel.popularList.collect { result ->
                 when(result){
                     is ResultType.Error -> {
 
