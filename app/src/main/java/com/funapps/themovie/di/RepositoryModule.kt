@@ -1,5 +1,7 @@
 package com.funapps.themovie.di
 
+import com.funapps.themovie.data.repository.MoviesRepository
+import com.funapps.themovie.data.repository.MoviesRepositoryImpl
 import com.funapps.themovie.data.repository.PopularRepository
 import com.funapps.themovie.data.repository.PopularRepositoryImpl
 import dagger.Binds
@@ -16,4 +18,7 @@ abstract class RepositoryModule {
 
     @Binds
     abstract fun providePopularRepository(popularRepository: PopularRepositoryImpl): PopularRepository
+
+    @Binds
+    abstract fun provideMoviesRepository(popularRepository: MoviesRepositoryImpl): MoviesRepository
 }

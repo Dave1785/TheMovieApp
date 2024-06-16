@@ -1,5 +1,6 @@
 package com.funapps.themovie.data.remote
 
+import com.funapps.themovie.data.model.MovieResponse
 import com.funapps.themovie.data.model.Popular
 import com.funapps.themovie.data.model.PopularResponse
 import retrofit2.Response
@@ -21,5 +22,5 @@ interface TheMovieApiService {
         @Query("language") language: String,
         @Query("sort_by") sort_by: String,
         @Query("page") page: String
-    ): Response<PopularResponse>
+    ): Response<MovieResponse>
 }

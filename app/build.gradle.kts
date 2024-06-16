@@ -77,6 +77,8 @@ dependencies {
     implementation(libs.kotlin.coroutines)
     implementation(libs.androidx.fragment)
     implementation(libs.androidx.activity)
+    implementation(libs.glide)
+    implementation(libs.glide.procesor)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
