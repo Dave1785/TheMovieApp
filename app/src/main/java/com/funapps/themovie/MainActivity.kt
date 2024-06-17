@@ -1,8 +1,11 @@
 package com.funapps.themovie
 
 import android.app.Activity
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import android.graphics.Color
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -21,19 +24,29 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.home_activity)
 
+        val actionBar = supportActionBar
+
+        // Set the background color
+        actionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#590eed")))
+
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
         bottomNavigationView.setupWithNavController(navController)
 
+        navController.navigate(R.id.profileFragment)
+        actionBar?.title = "The most popular"
+
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.profileFragment -> {
+                    actionBar?.title = "The most popular"
                     navController.navigate(R.id.profileFragment)
                     return@setOnItemSelectedListener true
                 }
                 R.id.moviesFragment -> {
+                    actionBar?.title = "The movies"
                     navController.navigate(R.id.moviesFragment)
                     return@setOnItemSelectedListener true
                 }

@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
 @HiltViewModel
 class ProfileViewModel @Inject constructor(private val repository: PopularRepository) : ViewModel() {
 
@@ -21,7 +20,11 @@ class ProfileViewModel @Inject constructor(private val repository: PopularReposi
     )
     val popularList: StateFlow<ResultType<PopularResponse>> = _popularList
 
-    fun getPopularList(page: Int) {
+    init {
+        getPopularList(1)
+    }
+
+    private fun getPopularList(page: Int) {
         viewModelScope.launch {
             repository.getPopularList(page)
                 .catch { e -> ResultType.Error(e) }

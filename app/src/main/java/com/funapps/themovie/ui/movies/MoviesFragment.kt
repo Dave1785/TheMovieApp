@@ -38,6 +38,8 @@ class MoviesFragment: Fragment()  {
 
         val moviesAdapter = MoviesAdapter()
         val moviesRV = view.findViewById<RecyclerView>(R.id.movies_rv)
+        moviesRV.layoutManager = LinearLayoutManager(requireContext())
+        moviesRV.adapter = moviesAdapter
 
         val loadingView = view.findViewById<FrameLayout>(R.id.loading_view)
 
@@ -61,8 +63,7 @@ class MoviesFragment: Fragment()  {
             moviesViewModel.getMoviesList(SortedByType.MOST_RANKED)
         }
 
-        moviesRV.layoutManager = LinearLayoutManager(requireContext())
-        moviesRV.adapter = moviesAdapter
+
 
         moviesRV.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
