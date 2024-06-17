@@ -7,7 +7,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.funapps.themovie.R
 
-
 class LocationsAdapter(private val locations: List<LocationData>) :
     RecyclerView.Adapter<LocationsAdapter.LocationViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LocationViewHolder {
@@ -31,8 +30,8 @@ class LocationsAdapter(private val locations: List<LocationData>) :
         var dateTextView: TextView
 
         init {
-            nameTextView = itemView.findViewById<TextView>(R.id.nameTextView)
-            dateTextView = itemView.findViewById<TextView>(R.id.dateTextView)
+            nameTextView = itemView.findViewById(R.id.nameTextView)
+            dateTextView = itemView.findViewById(R.id.dateTextView)
         }
     }
 }

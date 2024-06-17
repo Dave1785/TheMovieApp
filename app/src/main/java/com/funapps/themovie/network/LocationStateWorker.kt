@@ -57,7 +57,7 @@ class LocationStateWorker(val context: Context, workerParams: WorkerParameters) 
 
                         showNotification(
                             title = "Device Location",
-                            message = "Se agrego la ubicación del dispositivo con éxito idUbicaion:$id"
+                            message = "Se agrego la ubicación del dispositivo con éxito :$id"
                         )
                     }
                 }
@@ -89,9 +89,14 @@ class LocationStateWorker(val context: Context, workerParams: WorkerParameters) 
     }
 
     private fun showNotification(title: String, message: String) {
+        val expandedView = NotificationCompat.BigTextStyle()
+            .bigText(message)
+            .setBigContentTitle(title)
+
         val notification = NotificationCompat.Builder(applicationContext, "LOCATION_CHANNEL_ID")
             .setSmallIcon(R.drawable.add_location)  // replace with your app's icon
             .setContentTitle(title)
+            .setStyle(expandedView)
             .setContentText(message)
             .setPriority(NotificationCompat.FOREGROUND_SERVICE_IMMEDIATE)
             .build()

@@ -17,7 +17,6 @@ import com.funapps.themovie.network.SortedByType
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
-
 @AndroidEntryPoint
 class MoviesFragment: Fragment()  {
 
@@ -53,15 +52,13 @@ class MoviesFragment: Fragment()  {
 
         mostRecommendedTv.setOnClickListener {
             moviesAdapter.submitList(emptyList())
-            moviesViewModel.getMoviesList(SortedByType.MOST_RECOMENDED)
+            moviesViewModel.getMoviesList(SortedByType.MOST_RECOMMENDED)
         }
 
         mostRankedTv.setOnClickListener {
             moviesAdapter.submitList(emptyList())
             moviesViewModel.getMoviesList(SortedByType.MOST_RANKED)
         }
-
-
 
         moviesRV.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {

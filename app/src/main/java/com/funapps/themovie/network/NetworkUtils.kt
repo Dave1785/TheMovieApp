@@ -2,10 +2,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
-import android.widget.Toast
-import androidx.core.view.isVisible
 import com.funapps.themovie.network.NetworkState
-import com.google.firebase.firestore.FirebaseFirestore
 
 object NetworkUtils {
     fun getNetworkState(context: Context): NetworkState {

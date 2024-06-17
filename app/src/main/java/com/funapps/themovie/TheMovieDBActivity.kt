@@ -17,9 +17,8 @@ import com.funapps.themovie.receivers.WifiBroadcastReceiver
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(){
+class TheMovieDBActivity : AppCompatActivity(){
 
     private lateinit var navController: NavController
     private val broadcastReceiver = WifiBroadcastReceiver()

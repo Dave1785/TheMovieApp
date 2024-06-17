@@ -2,7 +2,6 @@ package com.funapps.themovie.ui.maps
 
 import android.Manifest
 import android.Manifest.permission.POST_NOTIFICATIONS
-import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
@@ -29,12 +28,10 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Date
-import android.location.Location
 import com.funapps.themovie.network.scheduleNetworkStateCheck
 import com.google.android.gms.location.LocationServices
 
 const val LOCATION_PERMISSION_REQUEST_CODE = 1
-
 @AndroidEntryPoint
 class MapsFragment : Fragment(), OnMapReadyCallback {
 
@@ -44,7 +41,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     private lateinit var adapter: LocationsAdapter
     private lateinit var db: FirebaseFirestore
     private lateinit var locationList: MutableList<LocationData>
-    private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,8 +52,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
 
         if (ContextCompat.checkSelfPermission(
                 requireContext(),
@@ -90,11 +84,11 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         recyclerView.setLayoutManager(LinearLayoutManager(requireActivity()));
         recyclerView.setAdapter(adapter);
 
-        fetchLocationsFromFirestore()
+        fetchLocationsFromFirebase()
 
     }
 
-    private fun fetchLocationsFromFirestore() {
+    private fun fetchLocationsFromFirebase() {
         db.collection("locations")
             .get()
             .addOnCompleteListener { task: Task<QuerySnapshot> ->

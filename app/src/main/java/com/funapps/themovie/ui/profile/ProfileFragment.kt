@@ -18,19 +18,14 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 private const val BASE_URL_IMAGE = "https://image.tmdb.org/t/p/w1280/"
-
 @AndroidEntryPoint
 class ProfileFragment : Fragment() {
 
     private val profileViewModel: ProfileViewModel by viewModels()
 
     private lateinit var profileImageView: ImageView
-    private lateinit var overviewImage: ImageView
-
     private lateinit var profileName: TextView
     private lateinit var knownFor: TextView
-    private lateinit var profileMovieTitle: TextView
-    private lateinit var overviewMovie: TextView
     private lateinit var popularity: TextView
 
     override fun onCreateView(

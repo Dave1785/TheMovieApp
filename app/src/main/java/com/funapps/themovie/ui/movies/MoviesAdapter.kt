@@ -43,7 +43,6 @@ class MoviesAdapter : ListAdapter<Movie, MoviesAdapter.ItemViewHolder>(ItemDiffC
         holder.voteAveragePb.progress = currentItem.voteAverage.roundToInt()
         holder.voteAverageTv.text = "${currentItem.voteAverage.roundToInt()}0%"
 
-
         holder.moviePosterImage.load(
             imageUrl = BASE_URL_IMAGE + currentItem.posterPath,
             placeholder = R.drawable.placeholder_movie,

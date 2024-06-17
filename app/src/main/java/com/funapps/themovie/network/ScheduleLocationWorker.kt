@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit
 
 fun scheduleNetworkStateCheck(context: Context) {
 
-    val periodicWorkRequest = PeriodicWorkRequestBuilder<LocationStateWorker>(1, TimeUnit.MINUTES)
+    val periodicWorkRequest = PeriodicWorkRequestBuilder<LocationStateWorker>(5, TimeUnit.MINUTES)
         .build()
 
     // Enqueue the periodic work

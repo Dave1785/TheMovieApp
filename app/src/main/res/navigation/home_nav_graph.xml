@@ -3,26 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/home_navigation"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/profileFragment">
 
-    <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.funapps.themovie.ui.home.HomeFragment"
-        android:label="HomeFragment"
-        tools:layout="@layout/home_fragment">
-        <action
-            android:id="@+id/action_homeFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_moviesFragment"
-            app:destination="@id/moviesFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_cameraFragment"
-            app:destination="@id/cameraFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_mapsFragment"
-            app:destination="@id/mapsFragment" />
-    </fragment>
     <fragment
         android:id="@+id/moviesFragment"
         android:name="com.funapps.themovie.ui.movies.MoviesFragment"

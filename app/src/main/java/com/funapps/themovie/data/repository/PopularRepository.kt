@@ -3,7 +3,7 @@ package com.funapps.themovie.data.repository
 import com.funapps.themovie.data.database.PopularDao
 import com.funapps.themovie.network.NetworkState
 import com.funapps.themovie.network.remoteSource.PopularRemoteSource
-import com.funapps.themovie.network.performGetOperation
+import com.funapps.themovie.network.performGetOperationPopular
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -14,7 +14,7 @@ class PopularRepository @Inject constructor(
     private val networkState: NetworkState,
 ) {
 
-    suspend fun getPopularList() = performGetOperation(
+    suspend fun getPopularList() = performGetOperationPopular(
         networkState = networkState,
         databaseQuery = { popularDao.getAllPopular() },
         networkCall = { popularRemoteSource.getMostPopularList() },

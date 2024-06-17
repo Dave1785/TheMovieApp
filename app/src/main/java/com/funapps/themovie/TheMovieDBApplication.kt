@@ -7,7 +7,7 @@ import dagger.hilt.android.HiltAndroidApp
 import com.google.firebase.FirebaseApp
 
 @HiltAndroidApp
-class Application : Application() {
+class TheMovieDBApplication : Application() {
 
     companion object {
         lateinit var database: TheMovieDB

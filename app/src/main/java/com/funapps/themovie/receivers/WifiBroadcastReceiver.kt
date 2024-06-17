@@ -16,13 +16,10 @@ class WifiBroadcastReceiver : BroadcastReceiver() {
         val networkInfo: NetworkInfo? = connectivityManager.activeNetworkInfo
         val isConnected: Boolean = networkInfo != null && networkInfo.isConnectedOrConnecting
 
-        // Check if connected to WiFi
-        if (isConnected ) {
-            // WiFi connected
+        if (isConnected) {
             Toast.makeText(context, "WiFi Connected", Toast.LENGTH_LONG).show()
 
         } else {
-            // WiFi disconnected
             Toast.makeText(context, "WiFi Disconnected", Toast.LENGTH_LONG).show()
         }
     }

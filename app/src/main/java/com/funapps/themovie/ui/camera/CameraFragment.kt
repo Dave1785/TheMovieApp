@@ -1,11 +1,9 @@
 package com.funapps.themovie.ui.camera
 
 import android.Manifest
-import android.app.Activity
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -34,7 +32,6 @@ import com.google.firebase.storage.StorageReference
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.io.File
-import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -47,7 +44,6 @@ const val REQUEST_IMAGE_CAPTURE = 3
 @AndroidEntryPoint
 class CameraFragment : Fragment() {
 
-    private val cameraViewModel: CameraViewModel by viewModels()
     private lateinit var db: FirebaseFirestore
     private var imageUri: Uri? = null
     private var currentPhotoUri: Uri? = null
@@ -110,17 +106,6 @@ class CameraFragment : Fragment() {
 
         loadingView = view.findViewById(R.id.loading_view)
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
-                cameraViewModel.getPopularList(1)
-            }
-        }
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            cameraViewModel.popularList.collect { result ->
-            }
-        }
-
     }
 
     private fun openFileChooser() {
@@ -155,7 +140,6 @@ class CameraFragment : Fragment() {
         }
 
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            // Image captured and saved to currentPhotoUri, you can proceed to upload it
             currentPhotoUri?.let { uri ->
                 uploadIv.loadUri(uri)
             }
@@ -226,21 +210,15 @@ class CameraFragment : Fragment() {
 
         loadingView.isVisible = true
         fileRef.putFile(currentPhotoUri!!)
-            .addOnSuccessListener { taskSnapshot ->
-                // File uploaded successfully
-                // Get the download URL if needed
+            .addOnSuccessListener {
                 loadingView.isVisible = false
                 Toast.makeText(
                     context,
                     "Success Upload Image",
                     Toast.LENGTH_LONG
                 ).show()
-                fileRef.downloadUrl.addOnSuccessListener { uri ->
-                    val downloadUrl = uri.toString()
-                    // Use the download URL as needed
-                }
             }
-            .addOnFailureListener { exception ->
+            .addOnFailureListener {
                 // Handle unsuccessful uploads
                 loadingView.isVisible = false
                 Toast.makeText(
