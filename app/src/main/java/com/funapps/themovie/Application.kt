@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.room.Room
 import com.funapps.themovie.data.database.TheMovieDB
 import dagger.hilt.android.HiltAndroidApp
+import com.google.firebase.FirebaseApp
 
 @HiltAndroidApp
 class Application : Application() {
@@ -19,6 +20,8 @@ class Application : Application() {
             applicationContext,
             TheMovieDB::class.java, "TheMovie-database"
         ).build()
+
+        FirebaseApp.initializeApp(this)
 
     }
 

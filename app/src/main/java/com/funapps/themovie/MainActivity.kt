@@ -15,7 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
 
     private lateinit var navController: NavController
     private val broadcastReceiver = WifiBroadcastReceiver()
@@ -56,10 +56,12 @@ class MainActivity : AppCompatActivity() {
                     return@setOnItemSelectedListener true
                 }
                 R.id.mapsFragment -> {
+                    actionBar?.title = "The map"
                     navController.navigate(R.id.mapsFragment)
                     return@setOnItemSelectedListener true
                 }
                 R.id.cameraFragment -> {
+                    actionBar?.title = "Add new location"
                     navController.navigate(R.id.cameraFragment)
                     return@setOnItemSelectedListener true
                 }

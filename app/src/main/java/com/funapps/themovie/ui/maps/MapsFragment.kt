@@ -1,57 +1,114 @@
 package com.funapps.themovie.ui.maps
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.funapps.themovie.R
-import com.funapps.themovie.network.ResultType
+import com.funapps.themovie.maps.LocationData
+import com.funapps.themovie.maps.LocationsAdapter
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.MapView
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QuerySnapshot
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.util.Date
+
 
 @AndroidEntryPoint
-class MapsFragment : Fragment() {
+class MapsFragment : Fragment(), OnMapReadyCallback {
 
-    private val mapsViewModel: MapsViewModel by viewModels()
+    private lateinit var mapView: MapView
+    private lateinit var googleMap: GoogleMap
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: LocationsAdapter
+    private lateinit var db: FirebaseFirestore
+    private lateinit var locationList: MutableList<LocationData>
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return  inflater.inflate(R.layout.home_fragment, container, false)
+        return inflater.inflate(R.layout.maps_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val textView = view.findViewById<TextView>(R.id.textView)
+        mapView = view.findViewById(R.id.mapView)
+        recyclerView = view.findViewById(R.id.maps_rv)
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED){
-                mapsViewModel.getPopularList(1)
-            }
-        }
+        mapView.onCreate(savedInstanceState)
+        mapView.getMapAsync(this)
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            mapsViewModel.popularList.collect { result ->
-                when(result){
-                    is ResultType.Error -> {
+        db = FirebaseFirestore.getInstance()
+        locationList = mutableListOf()
+        adapter = LocationsAdapter(emptyList())
 
-                    }
-                    is ResultType.Success -> {
-                        textView.text = result.data.results[0].name
-                    }
-                }
-            }
-        }
+        recyclerView.setLayoutManager(LinearLayoutManager(requireActivity()));
+        recyclerView.setAdapter(adapter);
+
+        fetchLocationsFromFirestore()
 
     }
 
+    private fun fetchLocationsFromFirestore() {
+        db.collection("locations")
+            .get()
+            .addOnCompleteListener { task: Task<QuerySnapshot> ->
+                if (task.isSuccessful) {
+                    for (document in task.result) {
+                        val name = document.getString("name")
+                        val lat = document.getDouble("latitude")
+                        val lng = document.getDouble("longitude")
+                        val date: Date? = document.getDate("timestamp")
+                        val locationData =
+                            LocationData(name ?: "", lat ?: 0.0, lng ?: 0.0, date ?: Date())
+                        locationList.add(locationData)
+                        val latLng = LatLng(lat ?: 0.0, lng ?: 0.0)
+                        googleMap.addMarker(MarkerOptions().position(latLng).title(name).snippet("TimeStamp: ${date.toString()}}"))
+                        googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng))
+                    }
+                    adapter.notifyDataSetChanged()
+                } else {
+                    Log.w("", "Error getting documents.", task.exception)
+                }
+            }
+    }
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        this.googleMap = googleMap;
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mapView.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mapView.onPause()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mapView.onDestroy()
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        mapView.onLowMemory()
+    }
 }

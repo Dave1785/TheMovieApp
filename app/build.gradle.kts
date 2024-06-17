@@ -4,6 +4,7 @@ plugins {
     kotlin("kapt")
     alias(libs.plugins.hilt.plugin)
     id("kotlin-parcelize")
+    id("com.google.gms.google-services")
 
 }
 
@@ -74,6 +75,7 @@ dependencies {
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.work.runtime.ktx)
+    implementation(libs.firebase.common.ktx)
     kapt(libs.hilt.android.compiler)
     implementation(libs.kotlin.coroutines)
     implementation(libs.androidx.fragment)
@@ -82,6 +84,9 @@ dependencies {
     implementation(libs.glide.procesor)
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
+    implementation(platform("com.google.firebase:firebase-bom:33.1.0"))
+    implementation ("com.google.firebase:firebase-firestore:24.6.1")
+    implementation ("com.google.android.gms:play-services-maps:18.0.2")
     kapt(libs.room.compiler)
 
 

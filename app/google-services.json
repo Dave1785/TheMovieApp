@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "80477235496",
+    "project_id": "themoviedb-5aa69",
+    "storage_bucket": "themoviedb-5aa69.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:80477235496:android:2645bb7a635388636bc81d",
+        "android_client_info": {
+          "package_name": "com.funapps.themovie"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDT_kYdcx-sAXRzAG2flhlXM4uqPkZt6Zg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -70,7 +70,7 @@ class ProfileFragment : Fragment() {
     private fun populateData(profile: Popular) {
         profileImageView.load(
             imageUrl = BASE_URL_IMAGE + profile.profilePath,
-            placeholder = R.drawable.placeholder_profile,
+            placeholder = R.drawable.place_holder_profile,
             error = R.drawable.placeholder_error
         )
         profileName.text = "Name: ${profile.name}"

@@ -1,17 +1,11 @@
-<!-- ic_profile_placeholder.xml -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="120dp"
-    android:height="120dp"
-    android:viewportWidth="120"
-    android:viewportHeight="120">
-
-    <!-- Circle background -->
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24.0"
+    android:viewportHeight="24.0">
     <path
-        android:fillColor="#CCCCCC"
-    android:pathData="M60,0C27,0 0,27 0,60s27,60 60,60s60,-27 60,-60S93,0 60,0zm0,18c14,0 26,12 26,26s-12,26 -26,26s-26,-12 -26,-26S46,18 60,18zm0,84c-22,0 -42,-9 -56,-24c2,-14 19,-26 42,-26c23,0 41,12 43,26C102,93 82,102 60,102z"/>
-
-    <!-- Person icon (or any other icon) -->
-    <path
-        android:fillColor="#FFFFFF"
-    android:pathData="M50,25c7.18,0 13,5.82 13,13s-5.82,13 -13,13s-13,-5.82 -13,-13s5.82,-13 13,-13zm0,18c3.31,0 6,-2.69 6,-6s-2.69,-6 -6,-6s-6,2.69 -6,6s2.69,6 6,6zm0,16c-9.92,0 -19.34,-4.29 -25.79,-11.78C10.16,40.91 10,38.52 10,36c0,-14.36 11.64,-26 26,-26s26,11.64 26,26c0,2.52 -0.16,4.91 -0.44,7.22C69.34,54.71 60.92,59 51,59z"/>
+        android:fillColor="#FF000000"
+        android:pathData="M12,2C7.03,2 3,6.03 3,11c0,3.86 3.22,7.64 8.55,13.52 0.39,0.35 1.05,0.35 1.44,0C17.78,18.64 21,14.86 21,11C21,6.03 16.97,2 12,2zm0,2c3.31,0 6,2.69 6,6 0,2.42 -2.05,5.25 -6,9.75 -3.95,-4.5 -6,-7.33 -6,-9.75 0,-3.31 2.69,-6 6,-6zm0,3.75c1.71,0 3.25,1.47 3.25,3.25S13.71,12.25 12,12.25 8.75,10.78 8.75,9 10.29,6.75 12,6.75z"/>
 </vector>
+
+
