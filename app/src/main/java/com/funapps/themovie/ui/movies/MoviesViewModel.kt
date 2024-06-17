@@ -2,10 +2,11 @@ package com.funapps.themovie.ui.movies
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.funapps.themovie.data.model.Movie
 import com.funapps.themovie.data.model.MovieResponse
-import com.funapps.themovie.data.repository.MoviesRepository
 import com.funapps.themovie.network.ResultType
 import com.funapps.themovie.network.SortedByType
+import com.funapps.themovie.usecases.GetMovies
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,12 +16,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MoviesViewModel @Inject constructor(private val repository: MoviesRepository) : ViewModel() {
+class MoviesViewModel @Inject constructor(private val getMovies: GetMovies) : ViewModel() {
 
-    private val _moviesList = MutableStateFlow<ResultType<MovieResponse>>(
-        ResultType.Error(null)
-    )
-    val moviesList: StateFlow<ResultType<MovieResponse>> = _moviesList
+    private val _moviesList = MutableStateFlow<List<Movie>?>( null)
+    val moviesList: StateFlow<List<Movie>?> = _moviesList
 
     private val _isLoading = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading
@@ -39,7 +38,7 @@ class MoviesViewModel @Inject constructor(private val repository: MoviesReposito
             _isLoading.value = true
             page++
             viewModelScope.launch {
-                repository.getMoviesList(page, sortedByType)
+                getMovies.fetchAllMovies(page, sortedByType)
                     .catch { e -> ResultType.Error(e) }
                     .collect { result ->
                         _isLoading.value = false

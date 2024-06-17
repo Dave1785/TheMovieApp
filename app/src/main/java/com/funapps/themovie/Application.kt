@@ -19,6 +19,7 @@ class Application : Application() {
             applicationContext,
             TheMovieDB::class.java, "TheMovie-database"
         ).build()
+
     }
 
 }

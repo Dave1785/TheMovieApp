@@ -12,7 +12,7 @@ import retrofit2.http.Query
 interface TheMovieApiService {
 
     @GET("person/popular?")
-    suspend fun getPopularListAsync(
+    suspend fun getPopularList(
         @Query("language") language: String,
         @Query("page") page: String
     ): Response<PopularResponse?>

@@ -75,18 +75,15 @@ class MoviesFragment: Fragment()  {
         })
 
         viewLifecycleOwner.lifecycleScope.launch {
-            moviesViewModel.moviesList.collect { result ->
-                when(result){
-                    is ResultType.Error -> {
+            moviesViewModel.moviesList.collect { movies ->
+                movies?.let {
 
-                    }
-                    is ResultType.Success -> {
-                        val newList = moviesAdapter.currentList.toMutableList()
-                        newList.addAll(result.data.results) // newItems is a list of additional items you want to add
+                    val newList = moviesAdapter.currentList.toMutableList()
+                    newList.addAll(movies) // newItems is a list of additional items you want to add
 
-                        moviesAdapter.submitList(newList)
-                    }
+                    moviesAdapter.submitList(newList)
                 }
+
             }
         }
 

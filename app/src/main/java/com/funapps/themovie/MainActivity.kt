@@ -1,28 +1,35 @@
 package com.funapps.themovie
 
-import android.app.Activity
+import android.content.IntentFilter
+import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.wifi.WifiManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import android.graphics.Color
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.funapps.themovie.receivers.WifiBroadcastReceiver
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
+    val broadcastReceiver = WifiBroadcastReceiver()
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.home_activity)
+
+        val intentFilter = IntentFilter()
+        intentFilter.addAction(WifiManager.SUPPLICANT_CONNECTION_CHANGE_ACTION)
+        registerReceiver(broadcastReceiver, intentFilter)
 
         val actionBar = supportActionBar
 
@@ -63,6 +70,11 @@ class MainActivity : AppCompatActivity() {
             false
         }
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(broadcastReceiver)
     }
 
 }

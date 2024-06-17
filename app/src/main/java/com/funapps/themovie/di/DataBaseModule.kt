@@ -2,6 +2,7 @@ package com.funapps.themovie.di
 
 import android.content.Context
 import androidx.room.Room
+import com.funapps.themovie.data.database.MovieDao
 import com.funapps.themovie.data.database.PopularDao
 import com.funapps.themovie.data.database.TheMovieDB
 import dagger.Module
@@ -24,7 +25,12 @@ object DataBaseModule {
     }
 
     @Provides
-    fun provideUserDao(database: TheMovieDB): PopularDao {
+    fun providePopularDao(database: TheMovieDB): PopularDao {
         return database.popularDao()
+    }
+
+    @Provides
+    fun provideMoviesDao(database: TheMovieDB): MovieDao {
+        return database.moviesDao()
     }
 }

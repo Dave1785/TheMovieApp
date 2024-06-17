@@ -11,7 +11,7 @@ import javax.inject.Singleton
 class GetPopularList @Inject constructor(private val popularRepository: PopularRepository) {
 
     suspend fun getMostPopular(page: Int): Flow<Popular?> = flow {
-        val response = popularRepository.getPopularList(page)
+        val response = popularRepository.getPopularList()
         if(!response.isNullOrEmpty()){
             emit(response[0])
         }
