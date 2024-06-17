@@ -8,7 +8,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#997dd1">
+        android:background="@color/background_fragment_color">
 
 
         <androidx.constraintlayout.widget.Guideline
@@ -20,26 +20,26 @@
 
         <Button
             android:id="@+id/gallery_bt"
+            style="@style/TextViewStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="60dp"
             android:background="@drawable/rounded_bottom"
-            android:text="Galeria"
-            android:textColor="@color/white"
+            android:text="@string/gallery"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline4"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/upload_bt"
+            style="@style/TextViewStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:background="@drawable/rounded_bottom"
-            android:text="Upload File"
-            android:textColor="@color/white"
+            android:text="@string/upload_file"
             app:layout_constraintEnd_toEndOf="@+id/upload_image"
             app:layout_constraintStart_toStartOf="@+id/upload_image"
             app:layout_constraintTop_toBottomOf="@+id/upload_image" />
@@ -60,14 +60,17 @@
 
         <Button
             android:id="@+id/camera_bt"
-            android:background="@drawable/rounded_bottom"
-            android:layout_width="wrap_content"
+            style="@style/TextViewStyle"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="60dp"
-            android:text="Camera"
+            android:background="@drawable/rounded_bottom"
+            android:text="@string/camera"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline4" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -97,13 +100,12 @@
                 android:layout_marginBottom="8dp" />
 
             <TextView
+                style="@style/TextViewStyleBig"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Cargando..."
-                android:textColor="@color/white"
-                android:textSize="32sp"
-                android:textStyle="bold" />
+                android:text="@string/cargando"
+                android:textColor="@color/white" />
         </LinearLayout>
 
     </FrameLayout>

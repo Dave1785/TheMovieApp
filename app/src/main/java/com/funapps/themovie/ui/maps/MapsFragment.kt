@@ -11,12 +11,7 @@ import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.funapps.themovie.R
-import com.funapps.themovie.maps.LocationData
-import com.funapps.themovie.maps.LocationsAdapter
-import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
@@ -29,7 +24,6 @@ import com.google.firebase.firestore.QuerySnapshot
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Date
 import com.funapps.themovie.network.scheduleNetworkStateCheck
-import com.google.android.gms.location.LocationServices
 
 const val LOCATION_PERMISSION_REQUEST_CODE = 1
 @AndroidEntryPoint
@@ -37,10 +31,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var mapView: MapView
     private lateinit var googleMap: GoogleMap
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: LocationsAdapter
     private lateinit var db: FirebaseFirestore
-    private lateinit var locationList: MutableList<LocationData>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -72,20 +63,12 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         super.onViewCreated(view, savedInstanceState)
 
         mapView = view.findViewById(R.id.mapView)
-        recyclerView = view.findViewById(R.id.maps_rv)
-
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)
 
         db = FirebaseFirestore.getInstance()
-        locationList = mutableListOf()
-        adapter = LocationsAdapter(emptyList())
-
-        recyclerView.setLayoutManager(LinearLayoutManager(requireActivity()));
-        recyclerView.setAdapter(adapter);
 
         fetchLocationsFromFirebase()
-
     }
 
     private fun fetchLocationsFromFirebase() {
@@ -98,17 +81,14 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
                         val lat = document.getDouble("latitude")
                         val lng = document.getDouble("longitude")
                         val date: Date? = document.getDate("timestamp")
-                        val locationData =
-                            LocationData(name ?: "", lat ?: 0.0, lng ?: 0.0, date ?: Date())
-                        locationList.add(locationData)
                         val latLng = LatLng(lat ?: 0.0, lng ?: 0.0)
+
                         googleMap.addMarker(
                             MarkerOptions().position(latLng).title(name)
                                 .snippet("TimeStamp: ${date.toString()}}")
                         )
                         googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng))
                     }
-                    adapter.notifyDataSetChanged()
                 } else {
                     Log.w("", "Error getting documents.", task.exception)
                 }

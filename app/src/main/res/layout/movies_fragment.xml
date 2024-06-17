@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#997dd1">
+    android:background="@color/background_fragment_color">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/movies_rv"
@@ -26,7 +26,7 @@
         android:layout_weight="1"
         android:background="@drawable/rounded_bottom"
         android:padding="8dp"
-        android:text="Mas populares"
+        android:text="@string/most_popular"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -40,7 +40,7 @@
         android:layout_weight="1"
         android:background="@drawable/rounded_bottom"
         android:padding="8dp"
-        android:text="Mas votadas"
+        android:text="@string/best_ranked"
         android:textColor="@color/white"
         app:layout_constraintEnd_toStartOf="@+id/most_ranked"
         app:layout_constraintStart_toEndOf="@+id/most_popular"
@@ -56,7 +56,7 @@
         android:layout_weight="1"
         android:background="@drawable/rounded_bottom"
         android:padding="8dp"
-        android:text="Mas calificadas"
+        android:text="@string/most_voted"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -89,7 +89,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Cargando..."
+                android:text="@string/loading"
                 android:textColor="@color/white"
                 android:textSize="32sp"
                 android:textStyle="bold" />

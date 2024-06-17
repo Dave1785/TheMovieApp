@@ -126,7 +126,14 @@ class CameraFragment : Fragment() {
                 uploadFileToFirebaseFromCamera()
             }
 
-            is SourceImageSelected.None -> Unit
+            is SourceImageSelected.None -> {
+                loadingView.isVisible = false
+                Toast.makeText(
+                    context,
+                    "You need select a file first",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
         }
 
     }

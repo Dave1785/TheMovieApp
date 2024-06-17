@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">TheMovieDB</string>
+    <string name="upload_file">Upload File</string>
+    <string name="camera">Camera</string>
+    <string name="cargando">Cargando...</string>
+    <string name="gallery">Gallery</string>
+    <string name="most_popular">Most popular</string>
+    <string name="best_ranked">Best ranked</string>
+    <string name="most_voted">Most voted</string>
+    <string name="loading">Loading...</string>
+    <string name="you_don_t_have_connection_try_again_later">You don\'t have connection, try again later...</string>
+    <string name="_80">80%</string>
+    <string name="star_wars_vi">Star Wars VI</string>
+    <string name="desc_movie">Treinta años después de haber derrotado al Imperio, una nueva amenaza se cierne sobre la República. El terrible y enigmático guerrero Kylo Ren, Treinta años después de haber derrotado al Imperio, una nueva amenaza se cierne sobre la República.</string>
+    <string name="overview">Lightning McQueen, a hotshot rookie race car driven to succeed, discovers that life is about the journey, not the finish line, when he finds himself unexpectedly detoured in the sleepy Route 66 town of Radiator Springs. On route across the country to the big Piston Cup Championship in California to compete against two seasoned pros, McQueen gets to know the town\'s offbeat characters.</string>
 </resources>

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_fragment_color"
     tools:context=".TheMovieDBActivity">
 
     <com.google.android.gms.maps.MapView
@@ -10,12 +11,4 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/maps_rv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="16dp"
-        android:background="@android:color/white"
-        android:elevation="4dp"/>
 </RelativeLayout>
