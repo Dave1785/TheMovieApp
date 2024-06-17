@@ -3,7 +3,6 @@ package com.funapps.themovie.ui.maps
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.funapps.themovie.data.model.PopularResponse
-import com.funapps.themovie.data.repository.PopularRepository
 import com.funapps.themovie.network.ResultType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,7 +13,7 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class MapsViewModel @Inject constructor(private val repository: PopularRepository) : ViewModel() {
+class MapsViewModel @Inject constructor() : ViewModel() {
 
     private val _popularList = MutableStateFlow<ResultType<PopularResponse>>(
         ResultType.Error(null)
@@ -22,12 +21,6 @@ class MapsViewModel @Inject constructor(private val repository: PopularRepositor
     val popularList: StateFlow<ResultType<PopularResponse>> = _popularList
 
     fun getPopularList(page: Int) {
-        viewModelScope.launch {
-            repository.getPopularList(page)
-                .catch { e -> ResultType.Error(e) }
-                .collect { result ->
-                    _popularList.value = result
-                }
-        }
+
     }
 }

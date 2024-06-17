@@ -79,6 +79,10 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.glide)
     implementation(libs.glide.procesor)
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    kapt(libs.room.compiler)
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

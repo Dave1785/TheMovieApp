@@ -61,17 +61,10 @@ class ProfileFragment : Fragment() {
         knownFor = view.findViewById(R.id.know_for_tv)
 
         viewLifecycleOwner.lifecycleScope.launch {
-            profileViewModel.popularList.collect { result ->
-                when (result) {
-                    is ResultType.Error -> {
-
-                    }
-
-                    is ResultType.Success -> {
-                        val profileData = result.data.results[0]
-                        populateData(profileData)
-                        profileMoviesAdapter.submitList(result.data.results[0].knowFor)
-                    }
+            profileViewModel.popularList.collect { mostPopular ->
+                mostPopular?.let {
+                    populateData(it)
+                    profileMoviesAdapter.submitList(it.knowFor)
                 }
             }
         }
