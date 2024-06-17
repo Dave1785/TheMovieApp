@@ -3,7 +3,6 @@ package com.funapps.themovie.ui.movies
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.funapps.themovie.data.model.Movie
-import com.funapps.themovie.data.model.MovieResponse
 import com.funapps.themovie.network.ResultType
 import com.funapps.themovie.network.SortedByType
 import com.funapps.themovie.usecases.GetMovies

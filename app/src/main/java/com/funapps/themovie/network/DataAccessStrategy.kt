@@ -3,7 +3,6 @@ package com.funapps.themovie.network
 import android.util.Log
 import com.funapps.themovie.data.model.Popular
 import com.funapps.themovie.data.model.PopularResponse
-import com.funapps.themovie.network.Resource.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response

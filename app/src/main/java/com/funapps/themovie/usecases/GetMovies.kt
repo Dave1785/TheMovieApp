@@ -2,7 +2,6 @@ package com.funapps.themovie.usecases
 
 import com.funapps.themovie.data.model.Movie
 import com.funapps.themovie.data.repository.MoviesRepository
-import com.funapps.themovie.data.repository.PopularRepository
 import com.funapps.themovie.network.SortedByType
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

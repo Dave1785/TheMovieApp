@@ -1,7 +1,6 @@
 package com.funapps.themovie.ui.movies
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +13,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.funapps.themovie.R
-import com.funapps.themovie.network.ResultType
 import com.funapps.themovie.network.SortedByType
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
