@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/profileFragment"
+        android:id="@+id/menuProfile"
         android:title="Home"
         android:icon="@drawable/account" />
     <item
-        android:id="@+id/moviesFragment"
+        android:id="@+id/menuMovies"
         android:title="Home"
         android:icon="@drawable/movie" />
     <item
-        android:id="@+id/mapsFragment"
+        android:id="@+id/menuMaps"
         android:title="Home"
         android:icon="@drawable/add_location" />
     <item
-        android:id="@+id/cameraFragment"
+        android:id="@+id/menuCamera"
         android:title="Home"
         android:icon="@drawable/baseline_camera_24" />
 </menu>

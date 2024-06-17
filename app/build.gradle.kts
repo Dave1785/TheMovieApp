@@ -14,7 +14,7 @@ android {
 
     defaultConfig {
         applicationId = "com.funapps.themovie"
-        minSdk = 21
+        minSdk = 23
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -76,6 +76,7 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.work.runtime.ktx)
     implementation(libs.firebase.common.ktx)
+    implementation(libs.play.services.location)
     kapt(libs.hilt.android.compiler)
     implementation(libs.kotlin.coroutines)
     implementation(libs.androidx.fragment)
@@ -87,6 +88,8 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.1.0"))
     implementation ("com.google.firebase:firebase-firestore:24.6.1")
     implementation ("com.google.android.gms:play-services-maps:18.0.2")
+    implementation ("com.google.firebase:firebase-storage-ktx")
+    implementation ("com.google.firebase:firebase-auth-ktx")
     kapt(libs.room.compiler)
 
 

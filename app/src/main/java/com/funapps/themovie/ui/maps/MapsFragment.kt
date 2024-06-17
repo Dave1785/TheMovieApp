@@ -1,16 +1,23 @@
 package com.funapps.themovie.ui.maps
 
+import android.Manifest
+import android.Manifest.permission.POST_NOTIFICATIONS
+import android.annotation.SuppressLint
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.funapps.themovie.R
 import com.funapps.themovie.maps.LocationData
 import com.funapps.themovie.maps.LocationsAdapter
+import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
@@ -22,7 +29,11 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Date
+import android.location.Location
+import com.funapps.themovie.network.scheduleNetworkStateCheck
+import com.google.android.gms.location.LocationServices
 
+const val LOCATION_PERMISSION_REQUEST_CODE = 1
 
 @AndroidEntryPoint
 class MapsFragment : Fragment(), OnMapReadyCallback {
@@ -33,6 +44,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     private lateinit var adapter: LocationsAdapter
     private lateinit var db: FirebaseFirestore
     private lateinit var locationList: MutableList<LocationData>
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,6 +52,26 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         savedInstanceState: Bundle?
     ): View {
         return inflater.inflate(R.layout.maps_fragment, container, false)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
+
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, POST_NOTIFICATIONS),
+                LOCATION_PERMISSION_REQUEST_CODE
+            )
+        }
+
+        scheduleNetworkStateCheck(requireActivity())
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -76,7 +108,10 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
                             LocationData(name ?: "", lat ?: 0.0, lng ?: 0.0, date ?: Date())
                         locationList.add(locationData)
                         val latLng = LatLng(lat ?: 0.0, lng ?: 0.0)
-                        googleMap.addMarker(MarkerOptions().position(latLng).title(name).snippet("TimeStamp: ${date.toString()}}"))
+                        googleMap.addMarker(
+                            MarkerOptions().position(latLng).title(name)
+                                .snippet("TimeStamp: ${date.toString()}}")
+                        )
                         googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng))
                     }
                     adapter.notifyDataSetChanged()

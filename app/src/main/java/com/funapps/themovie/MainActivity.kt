@@ -1,9 +1,13 @@
 package com.funapps.themovie
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
 import android.content.IntentFilter
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.wifi.WifiManager
+import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -45,23 +49,23 @@ class MainActivity : AppCompatActivity(){
 
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.profileFragment -> {
+                R.id.menuProfile -> {
                     actionBar?.title = "The most popular"
                     navController.navigate(R.id.profileFragment)
                     return@setOnItemSelectedListener true
                 }
-                R.id.moviesFragment -> {
+                R.id.menuMovies -> {
                     actionBar?.title = "The movies"
                     navController.navigate(R.id.moviesFragment)
                     return@setOnItemSelectedListener true
                 }
-                R.id.mapsFragment -> {
+                R.id.menuMaps -> {
                     actionBar?.title = "The map"
                     navController.navigate(R.id.mapsFragment)
                     return@setOnItemSelectedListener true
                 }
-                R.id.cameraFragment -> {
-                    actionBar?.title = "Add new location"
+                R.id.menuCamera -> {
+                    actionBar?.title = "Upload File"
                     navController.navigate(R.id.cameraFragment)
                     return@setOnItemSelectedListener true
                 }
@@ -70,11 +74,29 @@ class MainActivity : AppCompatActivity(){
             false
         }
 
+        createNotificationChannel()
     }
 
     override fun onDestroy() {
         super.onDestroy()
         unregisterReceiver(broadcastReceiver)
+    }
+
+    private fun createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is not in the Support Library.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = "LOCATION_CHANNEL_ID"
+            val descriptionText = "Location notifications"
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel("LOCATION_CHANNEL_ID", name, importance).apply {
+                description = descriptionText
+            }
+            // Register the channel with the system.
+            val notificationManager: NotificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
     }
 
 }

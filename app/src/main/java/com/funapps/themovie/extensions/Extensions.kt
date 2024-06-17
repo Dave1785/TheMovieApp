@@ -1,5 +1,6 @@
 package com.funapps.themovie.extensions
 
+import android.net.Uri
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import com.bumptech.glide.Glide
@@ -14,5 +15,11 @@ fun ImageView.load(imageUrl: String, @DrawableRes placeholder: Int, @DrawableRes
         .apply(requestOptions)
         .placeholder(placeholder)
         .error(error)
+        .into(this)
+}
+
+fun ImageView.loadUri(uri: Uri) {
+    Glide.with(this)
+        .load(uri)
         .into(this)
 }
