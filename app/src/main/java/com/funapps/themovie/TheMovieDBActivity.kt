@@ -10,6 +10,8 @@ import android.net.wifi.WifiManager
 import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -18,7 +20,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class TheMovieDBActivity : AppCompatActivity(){
+class TheMovieDBActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
     private val broadcastReceiver = WifiBroadcastReceiver()
@@ -26,11 +28,14 @@ class TheMovieDBActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val splashScreen = installSplashScreen()
         setContentView(R.layout.home_activity)
 
         val intentFilter = IntentFilter()
         intentFilter.addAction(WifiManager.SUPPLICANT_CONNECTION_CHANGE_ACTION)
         registerReceiver(broadcastReceiver, intentFilter)
+
+
 
         val actionBar = supportActionBar
 

@@ -14,7 +14,7 @@ android {
 
     defaultConfig {
         applicationId = "com.funapps.themovie"
-        minSdk = 23
+        minSdk = 31
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -90,10 +90,17 @@ dependencies {
     implementation ("com.google.android.gms:play-services-maps:18.0.2")
     implementation ("com.google.firebase:firebase-storage-ktx")
     implementation ("com.google.firebase:firebase-auth-ktx")
+    implementation ( "androidx.core:core-splashscreen:1.0.0")
+
     kapt(libs.room.compiler)
 
 
     testImplementation(libs.junit)
+    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0")
+    testImplementation ("app.cash.turbine:turbine:0.12.1")
+    testImplementation ("org.mockito:mockito-core:4.3.1")
+    testImplementation ("org.mockito.kotlin:mockito-kotlin:4.0.0")
+    testImplementation ("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
