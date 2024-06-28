@@ -9,7 +9,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 
 fun ImageView.load(imageUrl: String, @DrawableRes placeholder: Int, @DrawableRes error: Int) {
-    var requestOptions =  RequestOptions().transforms( CenterCrop(),  RoundedCorners(24))
+    val requestOptions =  RequestOptions().transforms( CenterCrop(),  RoundedCorners(24))
     Glide.with(this.context)
         .load(imageUrl)
         .apply(requestOptions)
